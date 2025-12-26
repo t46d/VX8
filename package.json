@@ -12,18 +12,16 @@
     "db:reset": "supabase db reset"
   },
   "dependencies": {
-    "@react-three/drei": "^9.108.3",
-    "@react-three/fiber": "^8.17.3",
     "@supabase/ssr": "^0.5.0",
-    "@supabase/supabase-js": "^2.45.0",
+    "@supabase/supabase-js": "^2.46.1",
     "@vercel/analytics": "^1.6.1",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.5.0",
     "lucide-react": "^0.446.0",
-    "next": "^14.2.10",
+    "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.168.0",
+    "react-icons": "^5.2.1",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

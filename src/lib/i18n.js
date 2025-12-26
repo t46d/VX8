@@ -1,15 +1,15 @@
 // src/lib/i18n.js
 
 /**
- * ãáÝ ÅÚÏÇÏ ÇáÊÏæíá (i18n) æÅÏÇÑÉ ÇáÞæÇãíÓ ÇááÛæíÉ.
- * äÓÊÎÏã åäÇ ßÇÆä ÈÓíØ áÅÏÇÑÉ ÇáäÕæÕ ÈÏáÇð ãä ãßÊÈÉ ÎÇÑÌíÉ áÊÈÓíØ ÇáãÔÑæÚ.
+ * ملف إعداد الترجمة (i18n) وإدارة القواميس اللغوية.
+ * نستخدم هنا كائن بسيط لإدارة النصوص بدلاً من مكتبة خارجية لتبسيط المشروع.
  */
 
-// ÇáÞæÇãíÓ ÇááÛæíÉ
+// القواميس اللغوية
 export const translations = {
-  // ÇááÛÉ ÇáÅäÌáíÒíÉ - ÇáÇÝÊÑÇÖíÉ
+  // اللغة الإنجليزية - الافتراضية
   en: {
-    // ÇáæÇÌåÉ ÇáÚÇãÉ
+    // الواجهة العامة
     app_name: "VeXachat",
     loading: "Loading...",
     send: "Send",
@@ -17,7 +17,7 @@ export const translations = {
     cancel: "Cancel",
     welcome_title: "Experience the Future of Dating",
     
-    // ÇáãÕÇÏÞÉ
+    // المصادقة
     login_title: "Welcome Back, Cybernaut",
     signup_title: "Join the Neon Grid",
     email: "Email Address",
@@ -29,7 +29,7 @@ export const translations = {
     no_account: "Don't have an account?",
     has_account: "Already on the Grid?",
     
-    // ÕÝÍÉ ÇáÇÓÊßÔÇÝ (Discover)
+    // صفحة الاستكشاف (Discover)
     discover_title: "Discover New Connections",
     discover_subtitle: "Swipe to find your perfect match",
     matches_today: "Matches Today",
@@ -41,7 +41,7 @@ export const translations = {
     like: "Like",
     super_like: "Super Like",
     
-    // ÇáãáÝ ÇáÔÎÕí (Profile)
+    // الملف الشخصي (Profile)
     edit_profile: "Edit Profile",
     age: "Age",
     bio: "Bio",
@@ -51,86 +51,168 @@ export const translations = {
     consultant_rate: "Hourly Rate (USD)",
     specialties: "Specialties",
     
-    // ÇáÑÓÇÆá æÇáÅÔÚÇÑÇÊ
+    // الرسائل والإشعارات
     match_found: "It's a Match! Start Chatting.",
     message_new: "New Message from",
     
-    // ÍÇáÇÊ ÇáãØÇÈÞÉ
+    // حالات المطابقة
     status_pending: "Pending",
     status_accepted: "Accepted",
     status_rejected: "Rejected",
   },
 
-  // ÇááÛÉ ÇáÚÑÈíÉ
+  // اللغة العربية
   ar: {
-    // ÇáæÇÌåÉ ÇáÚÇãÉ
-    app_name: "ÝíÔÇÊ",
-    loading: "ÌÇÑí ÇáÊÍãíá...",
-    send: "ÅÑÓÇá",
-    save: "ÍÝÙ",
-    cancel: "ÅáÛÇÁ",
-    welcome_title: "ÇßÊÔÝ ãÓÊÞÈá ÇáãæÇÚÏÉ",
+    // الواجهة العامة
+    app_name: "فيشات",
+    loading: "جاري التحميل...",
+    send: "إرسال",
+    save: "حفظ",
+    cancel: "إلغاء",
+    welcome_title: "اكتشف مستقبل المواعدة",
     
-    // ÇáãÕÇÏÞÉ
-    login_title: "ãÑÍÈÇð ÈÚæÏÊß ÃíåÇ ÇáÓÇíÈÑäÇæÊ",
-    signup_title: "ÇäÖã Åáì ÇáÔÈßÉ ÇáäíæäíÉ",
-    email: "ÇáÈÑíÏ ÇáÅáßÊÑæäí",
-    password: "ßáãÉ ÇáãÑæÑ",
-    name: "ÇáÇÓã ÇáßÇãá",
-    login_button: "ÊÓÌíá ÇáÏÎæá",
-    signup_button: "ÅäÔÇÁ ÍÓÇÈ",
-    forgot_password: "äÓíÊ ßáãÉ ÇáãÑæÑ¿",
-    no_account: "áíÓ áÏíß ÍÓÇÈ¿",
-    has_account: "åá áÏíß ÍÓÇÈ ÈÇáÝÚá¿",
+    // المصادقة
+    login_title: "مرحباً بعودتك أيها السايبرناوت",
+    signup_title: "انضم إلى الشبكة النيونية",
+    email: "البريد الإلكتروني",
+    password: "كلمة المرور",
+    name: "الاسم الكامل",
+    login_button: "تسجيل الدخول",
+    signup_button: "إنشاء حساب",
+    forgot_password: "نسيت كلمة المرور؟",
+    no_account: "ليس لديك حساب؟",
+    has_account: "هل لديك حساب بالفعل؟",
     
-    // ÕÝÍÉ ÇáÇÓÊßÔÇÝ (Discover)
-    discover_title: "ÇßÊÔÝ ÚáÇÞÇÊ ÌÏíÏÉ",
-    discover_subtitle: "ÇÓÍÈ íãíäÇð ááÚËæÑ Úáì ÔÑíßß ÇáãËÇáí",
-    matches_today: "ÊØÇÈÞÇÊ Çáíæã",
-    profiles_remaining: "ÇáãáÝÇÊ ÇáãÊÈÞíÉ",
-    no_more_profiles: "áÞÏ ÑÃíÊ ÇáÌãíÚ!",
-    check_back_later: "ÊÍÞÞ áÇÍÞÇð áÑÄíÉ ÇáãÒíÏ ãä ÇáãáÝÇÊ",
-    refresh_profiles: "ÊÍÏíË ÇáãáÝÇÊ",
-    pass: "ÊÌÇæÒ",
-    like: "ÅÚÌÇÈ",
-    super_like: "ÅÚÌÇÈ ÎÇÑÞ",
+    // صفحة الاستكشاف (Discover)
+    discover_title: "اكتشف علاقات جديدة",
+    discover_subtitle: "اسحب يميناً للعثور على شريكك المثالي",
+    matches_today: "تطابقات اليوم",
+    profiles_remaining: "الملفات المتبقية",
+    no_more_profiles: "لقد رأيت الجميع!",
+    check_back_later: "تحقق لاحقاً لرؤية المزيد من الملفات",
+    refresh_profiles: "تحديث الملفات",
+    pass: "تجاوز",
+    like: "إعجاب",
+    super_like: "إعجاب خارق",
     
-    // ÇáãáÝ ÇáÔÎÕí (Profile)
-    edit_profile: "ÊÚÏíá ÇáãáÝ ÇáÔÎÕí",
-    age: "ÇáÚãÑ",
-    bio: "ÇáÓíÑÉ ÇáÐÇÊíÉ",
-    location: "ÇáãæÞÚ",
-    interests: "ÇáÇåÊãÇãÇÊ",
-    is_consultant: "ãÊÇÍ ááÇÓÊÔÇÑÉ",
-    consultant_rate: "ÇáÓÚÑ ÈÇáÓÇÚÉ (ÈÇáÏæáÇÑ ÇáÃãÑíßí)",
-    specialties: "ÇáÊÎÕÕÇÊ",
+    // الملف الشخصي (Profile)
+    edit_profile: "تعديل الملف الشخصي",
+    age: "العمر",
+    bio: "السيرة الذاتية",
+    location: "الموقع",
+    interests: "الاهتمامات",
+    is_consultant: "متاح للاستشارة",
+    consultant_rate: "السعر بالساعة (بالدولار الأمريكي)",
+    specialties: "التخصصات",
     
-    // ÇáÑÓÇÆá æÇáÅÔÚÇÑÇÊ
-    match_found: "ÊØÇÈÞ! ÇÈÏÃ ÇáÏÑÏÔÉ ÇáÂä.",
-    message_new: "ÑÓÇáÉ ÌÏíÏÉ ãä",
+    // الرسائل والإشعارات
+    match_found: "تطابق! ابدأ الدردشة الآن.",
+    message_new: "رسالة جديدة من",
     
-    // ÍÇáÇÊ ÇáãØÇÈÞÉ
-    status_pending: "ãÚáÞ",
-    status_accepted: "ãÞÈæá",
-    status_rejected: "ãÑÝæÖ",
-  }
+    // حالات المطابقة
+    status_pending: "معلق",
+    status_accepted: "مقبول",
+    status_rejected: "مرفوض",
+  },
+
+  // اللغة الروسية
+  ru: {
+    app_name: "VeXachat",
+    loading: "Загрузка...",
+    send: "Отправить",
+    save: "Сохранить",
+    cancel: "Отмена",
+    welcome_title: "Испытайте будущее знакомств",
+    login_title: "Добро пожаловать, Кибернавт",
+    signup_title: "Присоединяйтесь к Неоновой Сети",
+    email: "Адрес электронной почты",
+    password: "Пароль",
+    name: "Полное имя",
+    login_button: "Войти",
+    signup_button: "Создать аккаунт",
+  },
+
+  // اللغة التايلندية
+  th: {
+    app_name: "VeXachat",
+    loading: "กำลังโหลด...",
+    send: "ส่ง",
+    save: "บันทึก",
+    cancel: "ยกเลิก",
+    welcome_title: "สัมผัสอนาคตของการเดท",
+    login_title: "ยินดีต้อนรับกลับมา Cybernaut",
+    signup_title: "เข้าร่วมกริดนีออน",
+    email: "ที่อยู่อีเมล",
+    password: "รหัสผ่าน",
+    name: "ชื่อเต็ม",
+    login_button: "เข้าสู่ระบบ",
+    signup_button: "สร้างบัญชี",
+  },
+
+  // اللغة الإسبانية
+  es: {
+    app_name: "VeXachat",
+    loading: "Cargando...",
+    send: "Enviar",
+    save: "Guardar",
+    cancel: "Cancelar",
+    welcome_title: "Experimenta el Futuro de las Citas",
+    login_title: "Bienvenido de nuevo, Cybernaut",
+    signup_title: "Únete a la Red Neón",
+    email: "Dirección de correo electrónico",
+    password: "Contraseña",
+    name: "Nombre completo",
+    login_button: "Iniciar sesión",
+    signup_button: "Crear cuenta",
+  },
+
+  // اللغة الفرنسية
+  fr: {
+    app_name: "VeXachat",
+    loading: "Chargement...",
+    send: "Envoyer",
+    save: "Enregistrer",
+    cancel: "Annuler",
+    welcome_title: "Découvrez l'avenir des rencontres",
+    login_title: "Bon retour, Cybernaute",
+    signup_title: "Rejoignez la Grille Néon",
+    email: "Adresse e-mail",
+    password: "Mot de passe",
+    name: "Nom complet",
+    login_button: "Se connecter",
+    signup_button: "Créer un compte",
+  },
 };
 
 /**
- * ÞÇÆãÉ ÇááÛÇÊ ÇáãÏÚæãÉ æÇáÇÊÌÇå (LTR/RTL)
+ * قائمة اللغات المدعومة والاتجاه (LTR/RTL)
  */
 export const locales = [
   { locale: 'en', direction: 'ltr', name: 'English' },
-  { locale: 'ar', direction: 'rtl', name: 'ÇáÚÑÈíÉ' },
+  { locale: 'ar', direction: 'rtl', name: 'العربية' },
+  { locale: 'ru', direction: 'ltr', name: 'Русский' },
+  { locale: 'th', direction: 'ltr', name: 'ไทย' },
+  { locale: 'es', direction: 'ltr', name: 'Español' },
+  { locale: 'fr', direction: 'ltr', name: 'Français' },
 ];
 
 /**
- * æÙíÝÉ ÌáÈ ÇáäÕ ÇáãÊÑÌã
- * @param {string} locale - ßæÏ ÇááÛÉ ÇáãØáæÈ (ãËá 'en' Ãæ 'ar')
- * @param {string} key - ãÝÊÇÍ ÇáäÕ Ýí ÞÇãæÓ ÇáÊÑÌãÉ
- * @returns {string} ÇáäÕ ÇáãÊÑÌã Ãæ ÇáãÝÊÇÍ Ýí ÍÇá ÚÏã ÇáÚËæÑ Úáíå
+ * وظيفة جلب النص المترجم
+ * @param {string} locale - كود اللغة المطلوب (مثل 'en' أو 'ar')
+ * @param {string} key - مفتاح النص في قاموس الترجمة
+ * @returns {string} النص المترجم أو المفتاح في حال عدم العثور عليه
  */
 export function getTranslation(locale, key) {
   const dictionary = translations[locale] || translations.en;
   return dictionary[key] || key;
+}
+
+/**
+ * الحصول على اتجاه اللغة
+ * @param {string} locale - كود اللغة
+ * @returns {string} 'ltr' أو 'rtl'
+ */
+export function getDirection(locale) {
+  const localeInfo = locales.find(l => l.locale === locale);
+  return localeInfo?.direction || 'ltr';
 }

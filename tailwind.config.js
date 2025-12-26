@@ -8,6 +8,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: '#00f0ff',
+        secondary: '#b500ff',
+        accent: '#ff00c8',
         electric: '#00F0FF',
         'electric-dark': '#00B8CC',
         neon: {
@@ -41,6 +44,8 @@ module.exports = {
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'slide-in': 'slide-in 0.5s ease-out',
       },
       keyframes: {
         gradient: {
@@ -68,6 +73,14 @@ module.exports = {
           '100%': {
             'box-shadow': '0 0 30px rgba(255, 0, 200, 0.8)',
           },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0.5 },
+        },
+        'slide-in': {
+          '0%': { transform: 'translateX(100%)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 },
         },
       },
       fontFamily: {

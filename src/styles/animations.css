@@ -1,0 +1,172 @@
+/* تأثيرات CSS فقط - خفيفة وسريعة */
+
+/* تأثيرات النص المتلألئ */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5),
+               0 0 20px rgba(0, 240, 255, 0.3),
+               0 0 30px rgba(0, 240, 255, 0.1);
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px rgba(255, 0, 200, 0.5),
+               0 0 20px rgba(255, 0, 200, 0.3),
+               0 0 30px rgba(255, 0, 200, 0.1);
+}
+
+.text-glow-purple {
+  text-shadow: 0 0 10px rgba(181, 0, 255, 0.5),
+               0 0 20px rgba(181, 0, 255, 0.3),
+               0 0 30px rgba(181, 0, 255, 0.1);
+}
+
+/* تأثيرات التحميل */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
+  }
+}
+
+/* تأثيرات الانزلاق */
+.slide-in-right {
+  animation: slide-in-right 0.5s ease-out;
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.5s ease-out;
+}
+
+.slide-in-up {
+  animation: slide-in-up 0.5s ease-out;
+}
+
+.slide-in-down {
+  animation: slide-in-down 0.5s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* تأثيرات الدوران */
+.spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* تأثيرات التوهج */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5),
+              0 0 40px rgba(0, 240, 255, 0.3),
+              0 0 60px rgba(0, 240, 255, 0.1);
+}
+
+.glow-pink {
+  box-shadow: 0 0 20px rgba(255, 0, 200, 0.5),
+              0 0 40px rgba(255, 0, 200, 0.3),
+              0 0 60px rgba(255, 0, 200, 0.1);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(181, 0, 255, 0.5),
+              0 0 40px rgba(181, 0, 255, 0.3),
+              0 0 60px rgba(181, 0, 255, 0.1);
+}
+
+/* تأثيرات التحسين للأجهزة المحمولة */
+@media (max-width: 768px) {
+  .mobile-optimized {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    will-change: transform;
+  }
+  
+  /* تقليل التأثيرات على الأجهزة المحمولة */
+  .text-glow,
+  .text-glow-pink,
+  .text-glow-purple {
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+  }
+}
+
+/* تأثيرات الأداء */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* تأثيرات التدرج المتحرك */
+.gradient-animated {
+  background: linear-gradient(45deg, #00f0ff, #b500ff, #ff00c8);
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
