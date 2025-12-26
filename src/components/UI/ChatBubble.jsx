@@ -53,3 +53,4 @@ export default function ChatBubble({ isMine, content, timestamp, avatar }) {
     );
 }
 
+
