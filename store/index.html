@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeXachat | VIP Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-black text-white">
+
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <div class="flex justify-between items-center mb-12 glass p-6 rounded-2xl border-l-4 border-pink-600">
+            <div>
+                <h2 class="text-sm text-gray-400 uppercase tracking-widest">Your Balance</h2>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-gem text-cyan-400 text-2xl"></i>
+                    <span class="text-3xl font-black">2,500 <span class="text-xs text-cyan-400">VexaCoins</span></span>
+                </div>
+            </div>
+            <button class="bg-white text-black px-6 py-2 rounded-full font-bold text-xs hover:bg-pink-500 hover:text-white transition">TRANSACTION HISTORY</button>
+        </div>
+
+        <h1 class="text-4xl font-black text-center mb-2 gradient-text">VIP PACKAGES</h1>
+        <p class="text-center text-gray-500 mb-10 text-sm">SECURE 256-BIT SSL PAYMENT GATEWAY</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="glass p-8 rounded-[30px] border border-white/10 text-center hover:scale-105 transition-transform">
+                <i class="fas fa-coins text-4xl text-yellow-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">STARTER PACK</h3>
+                <div class="text-4xl font-black mb-6">$9.99</div>
+                <ul class="text-left text-sm text-gray-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> 1,000 VexaCoins</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Standard Chat Access</li>
+                </ul>
+                <button onclick="pay('9.99')" class="w-full py-4 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl font-bold">BUY NOW</button>
+            </div>
+
+            <div class="glass p-8 rounded-[30px] border-2 border-pink-500 text-center relative overflow-hidden transform scale-110 z-10">
+                <div class="absolute top-0 right-0 bg-pink-500 text-[10px] px-4 py-1 font-bold">MOST POPULAR</div>
+                <i class="fas fa-crown text-4xl text-pink-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">ELITE VIP</h3>
+                <div class="text-4xl font-black mb-6">$49.99</div>
+                <ul class="text-left text-sm text-gray-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> 10,000 VexaCoins</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Private Room Access</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Video Call Feature</li>
+                </ul>
+                <button onclick="pay('49.99')" class="w-full py-4 bg-pink-600 rounded-xl font-bold shadow-lg shadow-pink-500/20">GET ELITE</button>
+            </div>
+
+            <div class="glass p-8 rounded-[30px] border border-white/10 text-center hover:scale-105 transition-transform">
+                <i class="fas fa-gem text-4xl text-cyan-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">WHALE PACK</h3>
+                <div class="text-4xl font-black mb-6">$99.99</div>
+                <ul class="text-left text-sm text-gray-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> 25,000 VexaCoins</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> All Models Unlocked</li>
+                </ul>
+                <button onclick="pay('99.99')" class="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold">BUY NOW</button>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center opacity-50">
+            <p class="text-xs mb-4 uppercase">Secure Payments via</p>
+            <div class="flex justify-center gap-6 text-3xl">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-apple-pay"></i>
+                <i class="fab fa-bitcoin"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pay(amount) {
+            alert('Redirecting to Secure SSL Gateway for: $' + amount);
+            // هنا يتم الربط بـ Stripe أو PayPal مستقبلاً
+        }
+    </script>
+</body>
+</html>
