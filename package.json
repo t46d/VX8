@@ -1,6 +1,7 @@
 {
-  "name": "vx8-elite",
+  "name": "vexachat-elite",
   "version": "1.0.0",
+  "description": "Premium Adult Social Platform",
   "main": "index.html",
   "scripts": {
     "start": "npx serve ."

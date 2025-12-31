@@ -1,3 +1,121 @@
+#!/bin/bash
+
+echo "💎 جاري إنشاء هيكل مشروع VeXachat Elite المتكامل..."
+
+# 1. إنشاء المجلدات الأساسية
+mkdir -p css js assets
+
+# 2. إنشاء ملف الإعدادات لـ Vercel (لتجنب أخطاء البناء)
+cat > vercel.json << 'EOF'
+{
+  "version": 2,
+  "public": true,
+  "framework": null,
+  "cleanUrls": true
+}
+EOF
+
+# 3. إنشاء ملف package.json
+cat > package.json << 'EOF'
+{
+  "name": "vexachat-elite",
+  "version": "1.0.0",
+  "description": "Premium Adult Social Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
+EOF
+
+# 4. فصل كود CSS في ملف مستقل ليكون المشروع منظماً
+cat > css/style.css << 'EOF'
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --primary: #a50153;
+    --secondary: #480686;
+    --accent: #036d6d;
+    --dark: #000000;
+    --glass: rgba(255, 255, 255, 0.082);
+}
+
+body { 
+    background-color: var(--dark); 
+    color: white; 
+    font-family: 'Inter', sans-serif; 
+    overflow-x: hidden;
+}
+
+.glass { 
+    background: var(--glass); 
+    border: 1px solid rgba(255, 45, 149, 0.2); 
+    backdrop-filter: blur(20px); 
+    border-radius: 20px; 
+}
+
+.neon-glow { box-shadow: 0 0 40px rgba(255, 45, 150, 0.123); }
+.text-neon { color: var(--primary); text-shadow: 0 0 15px rgba(255, 45, 149, 0.6); }
+.gradient-bg { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); }
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.bg-animate {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 45, 149, 0.1), transparent),
+        radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1), transparent),
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05), transparent);
+    animation: bgMove 20s infinite alternate;
+}
+
+@keyframes bgMove {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.1) rotate(2deg); }
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: linear-gradient(var(--primary), var(--secondary)); border-radius: 10px; }
+
+.hover-lift:hover { transform: translateY(-5px); transition: transform 0.3s ease; }
+EOF
+
+# 5. إنشاء ملف JavaScript للتحكم في التفاعلات (Tabs/Chat)
+cat > js/main.js << 'EOF'
+function showTab(tabId) {
+    const tabs = ['chat-tab', 'models-tab', 'rooms-tab', 'dating-tab', 'shop-tab'];
+    tabs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+    });
+    const activeTab = document.getElementById(tabId + '-tab');
+    if (activeTab) activeTab.classList.remove('hidden');
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value;
+    if (msg.trim() !== "") {
+        const chatBox = document.getElementById('chatMessages');
+        const div = document.createElement('div');
+        div.className = "bg-white/5 p-3 rounded-xl border-l-4 border-pink-500 animate-fade-in";
+        div.innerHTML = `<span class="text-pink-400 font-bold">You:</span> <span class="text-gray-200">${msg}</span>`;
+        chatBox.appendChild(div);
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+}
+EOF
+
+# 6. إنشاء ملف index.html وربطه بالملفات الجديدة
+cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -90,3 +208,15 @@
     <script src="js/main.js"></script>
 </body>
 </html>
+EOF
+
+# 7. الرفع النهائي إلى GitHub و Vercel
+echo "📤 جاري الرفع إلى المستودع و Vercel..."
+git add .
+git commit -m "Complete Elite Template Build 2026"
+git push origin main
+
+# الرفع لـ Vercel (سيأخذ الإعدادات من vercel.json)
+vercel --prod --yes --force
+
+echo "✅ مبروك! مشروعك الآن يعمل بكامل ملفاته المنظمة."
