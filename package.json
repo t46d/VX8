@@ -1,38 +1,8 @@
 {
-  "name": "vexachat",
-  "version": "2.0.0",
-  "private": true,
-  "description": "Advanced social dating platform with AI-powered matching and immersive experiences",
+  "name": "vx8-elite",
+  "version": "1.0.0",
+  "main": "index.html",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@supabase/ssr": "^0.5.0",
-    "@supabase/supabase-js": "^2.46.1",
-    "@vercel/analytics": "^1.6.1",
-    "date-fns": "^3.6.0",
-    "framer-motion": "^11.5.0",
-    "lucide-react": "^0.446.0",
-    "next": "^14.2.35",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "zustand": "^4.5.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.14.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "supabase": "^1.200.0",
-    "tailwindcss": "^3.4.4",
-    "vercel": "^25.2.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "start": "npx serve ."
   }
 }
