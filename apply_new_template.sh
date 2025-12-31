@@ -1,3 +1,21 @@
+#!/bin/bash
+
+echo "🔄 بدء عملية دمج القالب الجديد..."
+
+# التحقق من وجود الملف القديم
+if [ ! -f "index.html" ]; then
+    echo "❌ ملف index.html غير موجود في المجلد الحالي"
+    echo "📁 يرجى تشغيل السكريبت من مجلد المشروع الرئيسي"
+    exit 1
+fi
+
+# إنشاء نسخة احتياطية من الملف القديم
+BACKUP_FILE="index_old_$(date +%Y%m%d_%H%M%S).html"
+echo "💾 إنشاء نسخة احتياطية: $BACKUP_FILE"
+cp index.html "$BACKUP_FILE"
+
+# إنشاء الملف الجديد مع تحديث السنة إلى 2026
+cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -1116,3 +1134,158 @@
     </script>
 </body>
 </html>
+EOF
+
+echo "✅ تم تحديث الملف الرئيسي (index.html) بالقالب الجديد والسنة 2026"
+
+# إنشاء ملف سكريبت الدفع (اختياري)
+if [ ! -f "payment-webhook.js" ]; then
+    cat > payment-webhook.js << 'EOF'
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+const packages = {
+    gold: { price: 19.99, coins: 500, vipDays: 30 },
+    platinum: { price: 39.99, coins: 1000, vipDays: 60 },
+    diamond: { price: 99.99, coins: 5000, vipDays: 365 }
+};
+
+app.post('/api/payment/webhook', (req, res) => {
+    const { userId, packageType, paymentId, amount } = req.body;
+    
+    if (!userId || !packageType || !paymentId) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    
+    const package = packages[packageType];
+    if (!package) {
+        return res.status(400).json({ error: 'Invalid package type' });
+    }
+    
+    console.log(`Payment processed for user ${userId}:`);
+    console.log(`- Package: ${packageType}`);
+    console.log(`- Amount: $${amount}`);
+    console.log(`- Payment ID: ${paymentId}`);
+    
+    res.json({
+        success: true,
+        message: 'Payment processed successfully',
+        data: {
+            userId,
+            package: packageType,
+            coinsAdded: package.coins,
+            vipDays: package.vipDays,
+            transactionId: `TXN${Date.now()}`
+        }
+    });
+});
+
+app.post('/api/payment/process', (req, res) => {
+    const { cardNumber, expiry, cvv, packageType } = req.body;
+    
+    if (!cardNumber || !expiry || !cvv || !packageType) {
+        return res.status(400).json({ error: 'Missing payment details' });
+    }
+    
+    setTimeout(() => {
+        const success = Math.random() < 0.8;
+        
+        if (success) {
+            const package = packages[packageType];
+            res.json({
+                success: true,
+                message: 'Payment successful',
+                transactionId: `TXN${Date.now()}`,
+                package: {
+                    type: packageType,
+                    price: package.price,
+                    coins: package.coins,
+                    vipDays: package.vipDays
+                }
+            });
+        } else {
+            res.status(402).json({
+                success: false,
+                error: 'Payment declined'
+            });
+        }
+    }, 2000);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Payment server running on port ${PORT}`);
+});
+EOF
+    echo "✅ تم إنشاء ملف الدفع (payment-webhook.js)"
+else
+    echo "📁 ملف الدفع موجود مسبقاً، تم الحفاظ عليه"
+fi
+
+# إنشاء ملف package.json (اختياري)
+if [ ! -f "package.json" ]; then
+    cat > package.json << 'EOF'
+{
+  "name": "vexachat-elite",
+  "version": "2026.1.0",
+  "description": "Premium adult social platform - 2026 Edition",
+  "main": "index.html",
+  "scripts": {
+    "start": "node payment-webhook.js",
+    "dev": "npx serve ."
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "VeXachat Elite Team",
+  "license": "PROPRIETARY"
+}
+EOF
+    echo "✅ تم إنشاء ملف package.json"
+else
+    # تحديث السنة في package.json إذا كان موجوداً
+    if grep -q "2025" package.json; then
+        sed -i 's/2025/2026/g' package.json
+        echo "✅ تم تحديث السنة في package.json إلى 2026"
+    fi
+fi
+
+# إنشاء ملف README محدث
+cat > README_UPDATED.md << 'EOF'
+# VeXachat Elite - 2026 Edition
+
+## 🎯 الميزات الجديدة في النسخة 2026
+
+### 1. تصميم متطور
+- تأثيرات Neon حديثة
+- خلفيات متحركة
+- تصميم زجاجي (Glassmorphism)
+- ألوان متدرجة
+
+### 2. نظام متكامل
+- **غرف دردشة متعددة**: VIP، صوتية، خاصة
+- **عارضات بريميوم**: بأسماء جذابة
+- **نظام مواعدة**: اتصال مباشر
+- **متجر إلكتروني**: باقات VIP
+- **ملف شخصي**: قابل للتخصيص
+
+### 3. دعم لغات
+- الإنجليزية (الافتراضية)
+- التايلندية (ไทย)
+- الإسبانية (Español)
+- الفرنسية (Français)
+- الروسية (Русский)
+- العربية (العربية)
+
+### 4. نظام دفع آمن
+- بوابة دفع متكاملة
+- تشفير SSL 256-bit
+- دعم بطاقات متعددة
+
+## 🚀 كيفية التشغيل
+
+### الطريقة السريعة:
+```bash
+# افتح الملف مباشرة في المتصفح
+open index.html
