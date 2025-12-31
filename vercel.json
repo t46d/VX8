@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "public": true,
   "framework": null,
+  "buildCommand": "mkdir -p out && cp -r * out/ 2>/dev/null || true",
+  "outputDirectory": "out",
   "cleanUrls": true
 }
