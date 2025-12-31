@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useFormStatus } from 'react-dom';
 // استيراد Server Action للتسجيل
-import { signUp } from '@/services/auth';
+import { createUser } from '@/services/auth';
 
 const SubmitButton = ({ children }) => {
     const { pending } = useFormStatus();
@@ -40,7 +40,7 @@ export default function SignupForm() {
             return setError("Passwords do not match.");
         }
 
-        const result = await signUp(formData);
+        const result = await createUser(formData);
         
         if (result?.error) {
             setError(result.error);

@@ -4,12 +4,10 @@
   "private": true,
   "description": "Advanced social dating platform with AI-powered matching and immersive experiences",
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "db:push": "supabase db push",
-    "db:reset": "supabase db reset"
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.0",
@@ -32,10 +30,9 @@
     "postcss": "^8.4.38",
     "supabase": "^1.200.0",
     "tailwindcss": "^3.4.4",
-    "vercel": "^50.1.3"
+    "vercel": "^25.2.0"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "node": ">=18.0.0"
   }
 }
