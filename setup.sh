@@ -1,36 +1,32 @@
 #!/bin/bash
 
-echo "💎 البدء في بناء هيكل VeXachat Elite المنظم..."
+echo "🔄 جاري تحديث اسم المشروع إلى VeXachat وإصلاح إعدادات الرفع..."
 
-# 1. تنظيف الملفات القديمة (إذا وجدت) لضمان عدم حدوث تعارض
-rm -rf .next out build package-lock.json
+# 1. تنظيف شامل للمخلفات السابقة
+rm -rf .next out build package.json vercel.json
 
-# 2. إنشاء المجلدات
-mkdir -p public css js
-
-# 3. إنشاء ملف الإعدادات الحاسم لـ Vercel (هذا يحل مشكلة Next.js)
+# 2. إنشاء ملف vercel.json (لإجبار Vercel على التعامل معه كموقع Static)
 cat > vercel.json << 'EOF'
 {
   "version": 2,
   "framework": null,
-  "buildCommand": "mkdir -p out && cp -r * out/ 2>/dev/null || true",
-  "outputDirectory": "out",
-  "cleanUrls": true
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "."
 }
 EOF
 
-# 4. تحديث package.json بأوامر بناء وهمية لمنع الخطأ
+# 3. إنشاء ملف package.json بسيط جداً بدون أوامر Next.js
 cat > package.json << 'EOF'
 {
-  "name": "vexachat-elite",
+  "name": "vexachat",
   "version": "1.0.0",
-  "scripts": {
-    "build": "echo 'No build needed'"
-  }
+  "private": true
 }
 EOF
 
-# 5. فصل كود CSS (بدون أي تحريف في التصميم)
+# 4. إنشاء ملف CSS المنفصل (التصميم الأصلي)
+mkdir -p css
 cat > css/style.css << 'EOF'
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 :root {
@@ -51,47 +47,75 @@ body { background-color: var(--dark); color: white; font-family: 'Inter', sans-s
 }
 EOF
 
-# 6. إنشاء ملف index.html وربطه بالملفات
+# 5. إنشاء ملف index.html بالاسم الجديد VeXachat
 cat > index.html << 'EOF'
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VeXachat Elite</title>
+    <title>VeXachat | UNLEASH YOUR DESIRES</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="bg-animate"></div>
+    
+    <div class="w-full bg-gradient-to-r from-pink-900 to-purple-900 text-white text-[10px] font-bold py-2 px-4 text-center tracking-wider uppercase border-b border-white/10 sticky top-0 z-50 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <i class="fas fa-exclamation-triangle animate-pulse text-yellow-500"></i>
+            <span>EXPLICIT CONTENT - 19+ ONLY</span>
+        </div>
+        <span class="text-[9px]">VeXachat Official</span>
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 py-6">
         <header class="text-center mb-10">
-            <h1 class="text-6xl font-black italic gradient-text uppercase">VEXACHAT ELITE</h1>
-            <p class="text-pink-500 tracking-[0.3em] text-xs">UNLEASH YOUR DESIRES</p>
+            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter uppercase mb-2 gradient-text">VEXACHAT</h1>
+            <p class="text-pink-500 font-bold tracking-[0.3em] text-xs uppercase opacity-90">UNLEASH YOUR DESIRES</p>
         </header>
 
-        <nav class="glass p-4 mb-8 grid grid-cols-3 md:grid-cols-6 gap-2 text-center">
-            <div class="cursor-pointer hover:text-pink-500"><i class="fas fa-comments text-xl"></i><p class="text-[10px]">CHAT</p></div>
-            <div class="cursor-pointer hover:text-yellow-500"><i class="fas fa-star text-xl"></i><p class="text-[10px]">MODELS</p></div>
-            <div class="cursor-pointer hover:text-pink-500"><i class="fas fa-video text-xl"></i><p class="text-[10px]">ROOMS</p></div>
-            <div class="cursor-pointer hover:text-red-500"><i class="fas fa-heart text-xl"></i><p class="text-[10px]">DATING</p></div>
-            <div class="cursor-pointer hover:text-purple-500"><i class="fas fa-gem text-xl"></i><p class="text-[10px]">SHOP</p></div>
-            <div class="cursor-pointer hover:text-white"><i class="fas fa-user text-xl"></i><p class="text-[10px]">PROFILE</p></div>
+        <nav class="glass neon-glow p-2 mb-8 grid grid-cols-6 gap-1">
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-comments text-cyan-400"></i>
+                <span class="text-[8px] font-bold">CHAT</span>
+            </button>
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="text-[8px] font-bold">MODELS</span>
+            </button>
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-video text-pink-400"></i>
+                <span class="text-[8px] font-bold">ROOMS</span>
+            </button>
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-heart text-red-400"></i>
+                <span class="text-[8px] font-bold">DATING</span>
+            </button>
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-gem text-purple-400"></i>
+                <span class="text-[8px] font-bold">SHOP</span>
+            </button>
+            <button class="p-3 rounded-xl hover:bg-white/5 transition-all flex flex-col items-center gap-1">
+                <i class="fas fa-user text-white/50"></i>
+                <span class="text-[8px] font-bold">PROFILE</span>
+            </button>
         </nav>
 
-        <div class="glass p-8 text-center neon-glow">
-            <h2 class="text-2xl font-bold mb-4">مرحباً بك في النسخة النخبوية</h2>
-            <p class="text-gray-400">نظام التشغيل جاهز الآن. تم إصلاح أخطاء الرفع.</p>
-        </div>
+        <main class="glass p-12 text-center">
+            <h2 class="text-3xl font-bold mb-4">Welcome to VeXachat</h2>
+            <p class="text-gray-400">The platform has been updated successfully.</p>
+        </main>
     </div>
 </body>
 </html>
 EOF
 
-# 7. الرفع إلى Vercel
-echo "📤 جاري الرفع الآن..."
+# 6. دفع التغييرات إلى GitHub والرفع لـ Vercel
 git add .
-git commit -m "Fix: Force static deployment, remove Next.js dependency"
+git commit -m "Update name to VeXachat and fix Vercel static settings"
 git push origin main
-vercel --prod --yes
+vercel --prod --yes --force
+
+echo "✅ تم التحديث! المشروع متاح الآن باسم VeXachat وبدون أخطاء Next.js."

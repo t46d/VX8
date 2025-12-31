@@ -1,7 +1,5 @@
 {
-  "name": "vexachat-elite",
+  "name": "vexachat",
   "version": "1.0.0",
-  "scripts": {
-    "build": "echo 'No build needed'"
-  }
+  "private": true
 }
