@@ -1,147 +1,162 @@
-﻿// src/app/signup/SignupForm.jsx
+"use client"
 
-"use client";
-
-import { useState } from 'react';
-import Link from 'next/link';
-import { useFormStatus } from 'react-dom';
-// استيراد Server Action للتسجيل
-import { signUp } from '@/services/auth';
-
-const SubmitButton = ({ children }) => {
-    const { pending } = useFormStatus();
-
-    return (
-        <button
-            type="submit"
-            disabled={pending}
-            className="w-full py-3 mt-6 font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg"
-            style={{
-                background: 'linear-gradient(90deg, #FF00C8, #00F0FF)',
-                color: '#0A0A0A',
-                boxShadow: pending ? 'none' : '0 0 15px rgba(255, 0, 200, 0.4)'
-            }}
-        >
-            {pending ? 'Processing...' : children}
-        </button>
-    );
-};
+import { useState } from 'react'
 
 export default function SignupForm() {
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+  const [loading, setLoading] = useState(false)
 
-    const handleSignUp = async (formData) => {
-        setError('');
-        setSuccess(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    alert('Sign up successful! Check your email.')
+    setLoading(false)
+  }
 
-        // التحقق من تطابق كلمات المرور (يتم التعامل معها هنا في جانب العميل قبل إرسال Server Action)
-        if (formData.get('password') !== formData.get('confirmPassword')) {
-            return setError("Passwords do not match.");
-        }
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
-        const result = await signUp(formData);
-        
-        if (result?.error) {
-            setError(result.error);
-        } else if (result?.success) {
-            setSuccess(true);
-        }
-    };
+  return (
+    <div style={styles.container}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h2 style={styles.title}>Create Account</h2>
+        
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Full Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
 
-    // تصميم Glassmorphism
-    const glassStyle = {
-        background: 'rgba(10, 10, 10, 0.5)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255, 0, 200, 0.3)',
-        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
-    };
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Enter your email"
+            required
+          />
+        </div>
 
-    if (success) {
-        return (
-            <div 
-                className="p-10 rounded-xl text-white max-w-sm w-full mx-auto text-center"
-                style={glassStyle}
-            >
-                <p className="text-4xl mb-4">📧</p>
-                <h2 className="text-2xl font-bold text-green-400 mb-3">
-                    Confirmation Sent!
-                </h2>
-                <p className="text-gray-300 mb-6">
-                    Please check your email inbox to confirm your account and complete the registration.
-                </p>
-                <Link href="/login" className="text-cyan-400 hover:text-pink-400 transition-colors font-medium text-sm">
-                    Go back to Sign In
-                </Link>
-            </div>
-        );
-    }
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Create a password"
+            required
+          />
+        </div>
 
-    return (
-        <div 
-            className="p-8 rounded-xl text-white max-w-sm w-full mx-auto animate-fadeIn"
-            style={glassStyle}
-        >
-            <h2 className="text-3xl font-bold text-center mb-6 text-pink-300">
-                Create Account
-            </h2>
-            
-            <form action={handleSignUp}>
-                <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        className="w-full px-4 py-2 rounded-lg bg-black/40 border border-indigo-500/50 focus:border-cyan-500/80 focus:ring-1 focus:ring-cyan-500/80 outline-none transition-colors"
-                    />
-                </div>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
 
-                <div className="mb-4">
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
-                        Password
-                    </label>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        required
-                        className="w-full px-4 py-2 rounded-lg bg-black/40 border border-indigo-500/50 focus:border-cyan-500/80 focus:ring-1 focus:ring-cyan-500/80 outline-none transition-colors"
-                    />
-                </div>
-                
-                <div className="mb-6">
-                    <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-1">
-                        Confirm Password
-                    </label>
-                    <input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        required
-                        className="w-full px-4 py-2 rounded-lg bg-black/40 border border-indigo-500/50 focus:border-cyan-500/80 focus:ring-1 focus:ring-cyan-500/80 outline-none transition-colors"
-                    />
-                </div>
+        <button 
+          type="submit" 
+          style={styles.button}
+          disabled={loading}
+        >
+          {loading ? 'Creating Account...' : 'Sign Up Free'}
+        </button>
 
+        <p style={styles.terms}>
+          By signing up, you agree to our Terms of Service and Privacy Policy
+        </p>
+      </form>
+    </div>
+  )
+}
 
-                {error && (
-                    <p className="text-red-400 text-sm mb-4 text-center p-2 rounded-md bg-red-900/30 border border-red-500/40">
-                        {error}
-                    </p>
-                )}
-
-                <SubmitButton>Create VEXACHAT Account</SubmitButton>
-            </form>
-
-            <div className="mt-6 text-center text-sm text-gray-400">
-                Already have an account?{' '}
-                <Link href="/login" className="text-pink-400 hover:text-cyan-400 transition-colors font-medium">
-                    Sign In
-                </Link>
-            </div>
-        </div>
-    );
+const styles = {
+  container: {
+    maxWidth: '500px',
+    margin: '0 auto',
+    padding: '40px 20px',
+  },
+  form: {
+    background: 'rgba(255, 255, 255, 0.05)',
+    padding: '40px',
+    borderRadius: '20px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+  },
+  title: {
+    textAlign: 'center',
+    marginBottom: '30px',
+    fontSize: '2rem',
+    background: 'linear-gradient(45deg, #60a5fa, #a78bfa)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  },
+  inputGroup: {
+    marginBottom: '25px',
+  },
+  label: {
+    display: 'block',
+    marginBottom: '8px',
+    color: '#cbd5e1',
+    fontSize: '0.95rem',
+  },
+  input: {
+    width: '100%',
+    padding: '15px',
+    borderRadius: '10px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: 'white',
+    fontSize: '1rem',
+  },
+  button: {
+    width: '100%',
+    padding: '18px',
+    background: 'linear-gradient(45deg, #3b82f6, #8b5cf6)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '10px',
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    marginTop: '10px',
+  },
+  terms: {
+    textAlign: 'center',
+    color: '#94a3b8',
+    fontSize: '0.9rem',
+    marginTop: '25px',
+    lineHeight: '1.5',
+  },
 }
